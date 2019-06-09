@@ -1,0 +1,78 @@
+<html>
+<head>
+	<title>Ingreso de datos</title>
+
+	<style>
+		form {
+			width: 300px;
+			margin: 100px auto;
+			background-color: #f5f5f5;
+			border: 1px solid #ededed;
+			border-radius: 5px;
+			padding: 20px;
+			font-family: Arial;
+			color: #333;
+			font-size: 15px;
+		}
+		div {
+			margin-bottom: 20px;
+		}
+		.equipo {
+			display: inline-block;
+			padding: 0;
+			width: 145px;
+			margin-bottom: 0;
+		}
+		select {
+			width: 115px;
+		}
+		input[type=text] {
+			width: 210px;
+		}
+		input[type="number"] {
+			width: 30px;
+		}
+		label {
+			width: 100px;
+			display: inline-block;
+			text-align: left;
+		}
+		.opciones {
+			text-align: center;
+		}
+		.save {
+			font-size: 12px;
+			border: 1px solid #00B800;
+			background-color: #00B800;
+			color: #FFF;
+		}
+		.reset {
+			font-size: 12px;
+			border: 1px solid #555;
+			background-color: #FFF;
+			color: #555;
+			margin-left: 30px;
+		}
+		.equipo-2 {
+			text-align: right;
+		}
+	</style>
+
+</head>
+<body>
+	<form action="http://localhost:8080/cgi-bin/obligSMCB/obligatorio2.py" method="post">
+		<div>
+			<label>Usuario</label>
+			<input type="text" name="Usuario" />
+		</div>
+		<div>
+			<label>Contraseña</label>
+			<input type="text" name="Contraseña" />
+		</div>
+		<div class="opciones">
+			<input type="submit" value="Iniciar sesión" class="save" />
+			<input type="reset" value="Registrarse" class="reset" />
+		</div>
+	</form>
+</body>
+</html>
