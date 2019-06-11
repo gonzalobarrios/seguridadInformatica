@@ -10,14 +10,15 @@ class Usuario :
         return "Usuario {0} y pass {1} y salto {2}".format(self.usuario,self.contra,self.salto)
 
 
-def HashearString(string):
-    StringEnBytes=string.encode()
-    hash= hashlib.sha256(StringEnBytes)
-    return hash.digest()
+def HashearString(cadena):
+    StringEnBytes=cadena.encode()
+    hashString= hashlib.sha256(StringEnBytes)
+    return hashString.digest()
 
 
 def BuscarUsuario(usuario,ruta):
     archivo=open(ruta)
+    UserObject=None
     for linea in archivo:
         linea=linea.strip().split(',')
         if(len(linea)%3==0):    
@@ -57,31 +58,33 @@ def logIn(usuario,contra):
 params = cgi.FieldStorage()
 print ("Content-Type: text/html")
 print ("")
-print ("Content-Type: text/html")
 print ("")
-print ("<html>")
-print ("<body>")
-print ("Hola Muchachos!")
-print ("</body>")
-print ("</html>")
+
 
 try:
    
-    user=params.getvalue("Usuario")
-    contra=params.getvalue("Contraseña")
-    UsuarioRegistrado=BuscarUsuario(user, "C:\\Users\\Usuario\\Desktop\\Nueva carpeta\\Usuarios.txt")
+    user=str(params.getvalue("Usuario"))
+    contra=str(params.getvalue("Contraseña"))
+ 
+    UsuarioRegistrado=BuscarUsuario(user, "cgi-bin\\usuarios.txt")
     Comparacion=False
-    if UsuarioRegistrado !=None:
+  
+    if UsuarioRegistrado is not None:
         SaltoUsuarioRegistrado=UsuarioRegistrado.salto
-        HashDeUsuarioActual=HashearString(contra++SaltoUsuarioRegistrado)
+        ContraUsuarioYSalto =contra+SaltoUsuarioRegistrado
+        HashDeUsuarioActual=HashearString(ContraUsuarioYSalto)
         HashUsuarioRegistrado= UsuarioRegistrado.contra
-
         Comparacion=CompararHashes(HashDeUsuarioActual,HashUsuarioRegistrado)
 
     if(Comparacion):
+            
         print("Logueo exitoso")
+    
     else:
-            print("Usuario y/o contraseñas incorrectos")
+            
+        print("Usuario y/o contraseñas incorrectos")
+        
+    
 
 except:
     print("no se pudo completar la tarea")
@@ -92,7 +95,7 @@ except:
 
 """--------------------"""
 """PRUEBAS"""
-
+"""
 user="Manolito" 
 root="C:\\Users\\Usuario\\Desktop\\Nueva carpeta\\Usuarios.txt"
 ObjetoBuscado= BuscarUsuario( user,root)
@@ -100,6 +103,7 @@ print(ObjetoBuscado.contra)
 
 m = hashlib.sha256(b"hola")
 a=CompararHashes(HashearString("hola1"),m.digest())
+"""
 
 
 
