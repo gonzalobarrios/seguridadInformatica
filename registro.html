@@ -60,24 +60,25 @@
 
 </head>
 <body>
-	<form action="http://localhost:8080/cgi-bin/login.py" method="post">
+	<form action="http://localhost:8080/cgi-bin/registro.py" method="post">
 		<div>
 			<label>Usuario</label>
 			<input type="text" name="Usuario" />
 		</div>
 		<div>
 			<label>Contraseña</label>
-			<input type="password" name="Contrasena" />
+			<input type="password" name="Contrasena1" />
 		</div>
+		<div>
+			<label>Confirmar Contraseña</label>
+			<input type="password" name="Contrasena2" />
+		</div>
+
 		<div class="opciones">
-			<input type="submit" value="Iniciar sesión" name="boton1" class="save" />
+			<input type="submit" value="Registrarse" name="boton1" class="save" />
 		</div>
 	</form>
 
-	<form action="registro.html" method="get" target="_blank">
-		<div class="opciones">
-			<input type="submit" value="Registrarse" name="boton2" class="reset" />
-		</div>
-	</form>
+
 </body>
 </html>

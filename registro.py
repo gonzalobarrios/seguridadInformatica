@@ -13,8 +13,6 @@ class Usuario :
         return "Usuario {0} y pass {1} y salto {2}".format(self.usuario,self.contra,self.salto)
 
 
-
-
 def BuscarUsuario(usuario,ruta):
     archivo=open(ruta)
     UserObject=None
@@ -29,15 +27,13 @@ def BuscarUsuario(usuario,ruta):
     archivo.close()
     return UserObject
 
-
-
 def RegistrarUsuario(usuario,password,ruta):
 
     UserObject = None
     UsuarioRegistrado = BuscarUsuario(usuario, ruta)
 
     if UsuarioRegistrado is not None:
-        print("usuario ya registrado previamente")
+        print("Error: Usuario ya registrado previamente!")
     else:
 
         #print("vamos a registrar usuario nuevo")
@@ -49,11 +45,8 @@ def RegistrarUsuario(usuario,password,ruta):
         archivo.write(NewUser.strip())
         archivo.write("\n")
         archivo.close()
+        print("Usuario registrado exitosamente! ")
     return UserObject
-
-
-   
-
 
 def logIn(usuario,contra):
     #ValidarDatos(usuario,contra)"
@@ -76,33 +69,14 @@ print ("")
 
 
 try:
-    from hashing import *
+   
     user=str(params.getvalue("Usuario"))
-    contra=str(params.getvalue("Contrasena"))
-
+    contra=str(params.getvalue("Contrasena1"))
     print(user)
     print(contra)
-    UsuarioRegistrado=BuscarUsuario(user, "cgi-bin\\usuarios.txt")
-    Comparacion=False
+    from hashing import *
+    test=RegistrarUsuario(user, contra, "cgi-bin\\usuarios.txt")
 
-
-    if UsuarioRegistrado is not None:
-        SaltoUsuarioRegistrado=UsuarioRegistrado.salto
-        ContraUsuarioYSalto =contra+SaltoUsuarioRegistrado
-        HashDeUsuarioActual=HashearString(ContraUsuarioYSalto)
-
-
-        HashUsuarioRegistrado= UsuarioRegistrado.contra
-        Comparacion=CompararHashes(str(HashDeUsuarioActual),HashUsuarioRegistrado)
-    print(Comparacion)
-    if(Comparacion):
-            
-        print("Logueo exitoso")
-    
-    else:
-            
-        print("Usuario y/o contraseñas incorrectos")
-        
     
 
 except:
