@@ -1,82 +1,39 @@
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Ingreso de datos</title>
-
-	<style>
-		form {
-			width: 300px;
-			margin: 100px auto;
-			background-color: #f5f5f5;
-			border: 1px solid #ededed;
-			border-radius: 5px;
-			padding: 20px;
-			font-family: Arial;
-			color: #333;
-			font-size: 15px;
-		}
-		div {
-			margin-bottom: 20px;
-		}
-		.equipo {
-			display: inline-block;
-			padding: 0;
-			width: 145px;
-			margin-bottom: 0;
-		}
-		select {
-			width: 115px;
-		}
-		input[type=text] {
-			width: 210px;
-		}
-		input[type="number"] {
-			width: 30px;
-		}
-		label {
-			width: 100px;
-			display: inline-block;
-			text-align: left;
-		}
-		.opciones {
-			text-align: center;
-		}
-		.save {
-			font-size: 12px;
-			border: 1px solid #00B800;
-			background-color: #00B800;
-			color: #FFF;
-		}
-		.reset {
-			font-size: 12px;
-			border: 1px solid #555;
-			background-color: #FFF;
-			color: #555;
-			margin-left: 30px;
-		}
-		.equipo-2 {
-			text-align: right;
-		}
-	</style>
-
+ 
+    <head>
+      <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-	<form action="http://localhost:8080/cgi-bin/registro.py" method="post">
+
+	<form >
+		<h3 class="text-center py-3 border-bottom">Registro</h3>
 		<div>
 			<label>Usuario</label>
-			<input type="text" name="Usuario" />
+			<input type="text" placeholder="Usuario" name="Usuario" />
 		</div>
 		<div>
-			<label>Contraseña</label>
-			<input type="password" name="Contrasena1" />
+			<label>Contrase&ntildea</label>
+			<input type="password" placeholder="password" name="Contrasena1" />
 		</div>
 		<div>
-			<label>Confirmar Contraseña</label>
-			<input type="password" name="Contrasena2" />
+			<label>Confirmar Contrase&ntildea</label>
+			<input type="password" placeholder="password" name="Contrasena2" />
 		</div>
 
 		<div class="opciones">
-			<input type="submit" value="Registrarse" name="boton1" class="save" />
+			<button type="button" name="boton1" class="save"  onclick="window.location.href='http://localhost:8080/cgi-bin/registro.py'" / >Registrarse</button>
 		</div>
+	  <div class="row align-items-center justify-content-center">
+                  <button type="button" class="reset" onclick="window.location.href='http://localhost:8080/formInicial.html'">Volver</button>
+          
+                </div>	
+	
+		<div class="alert alert-danger">
+		  <strong>Recuerde :</strong> La contrase&ntildea debe tener al menos cinco caracteres.
+
+
 	</form>
 
 

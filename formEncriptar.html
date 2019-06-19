@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+    <head>
+      <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+	<form >
+		 <h3 class="text-center py-3 border-bottom">Encriptar Archivo</h3>
+		<div>
+		
+			<label>Ruta</label>
+			<input type="text" required placeholder="Ruta" name="Ruta" />
+		</div>
+		<div>  
+			<label>Passphrase</label>
+			<input type="password" required placeholder="Passphrase" name="Passphrase" />
+        </div>
+        
+        <div>  
+			<label>Confirm Passphrase</label>
+			<input type="password" required placeholder="Passphrase" name="Confirm Passphrase" />
+		</div>
+		
+		<div class="opciones">
+		<button type="button" name="boton1" class="save"  onclick="window.location.href='http://localhost:8080/cgi-bin/encriptar.py'" / >Encriptar</button>
+		</div>
+	      
+	       <div class="opciones">
+                <button type="button" class="reset" onclick="window.location.href='http://localhost:8080/formDescifrar.html'">Descifrar</button>
+
+
+                </div>
+	</form>
+          
+</body>
+
+
+</html>
