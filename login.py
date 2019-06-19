@@ -52,15 +52,6 @@ def RegistrarUsuario(usuario,password,ruta):
     return UserObject
 
 
-   
-
-
-def logIn(usuario,contra):
-    #ValidarDatos(usuario,contra)"
-    return 0
-
-
-
 #tomar parametros y hashear
 #buscar en el archivo 
 #comparar hashes
@@ -95,36 +86,61 @@ try:
         HashUsuarioRegistrado= UsuarioRegistrado.contra
         Comparacion=CompararHashes(str(HashDeUsuarioActual),HashUsuarioRegistrado)
     print(Comparacion)
+    Comparacion=True
+    
+
     if(Comparacion):
-            
-        print("Logueo exitoso")
+      
+        print("""<!DOCTYPE html>
+<html>
+<head>
+ 
+    <head>
+      <link rel="stylesheet" href="estilo.css">
+</head>
+
+""")
+        print(""""
+        <body>
+        <div align="left">
+        <form >
+        <label>"""+"Logueo exitoso""""</label>
+
+        <div class="opciones">
+                                <button type="button" class="save" onclick="window.location.href='javascript:history.back()'">Volver</button>
+                        </div>   """)
+
+        print("""<a href="formEncriptar.html"><button>MENU</button></a><br>
+""")
+     
+     
     
     else:
-            
-        print("Usuario y/o contraseñas incorrectos")
-        
+        print("""<!DOCTYPE html>
+<html>
+<head>
+ 
+    <head>
+      <link rel="stylesheet" href="estilo.css">
+</head>
+
+""")
+      
+        print("""
+        <body>
+        <div align="left">
+        <form >
+        <div class="opciones">
+                    <button type="button" class="save" onclick="window.location.href='javascript:history.back()'">Volver</button>
+                         </div>
+               <body>
+        </html>
+         """)
+        print ("<font color=\"red\">Usuario y/o contraseñas incorrectos</font>")   
     
 
 except:
     print("no se pudo completar la tarea")
 
-#print(m.digest())
-
-
-
-"""--------------------"""
-"""PRUEBAS"""
-"""
-user="Manolito" 
-root="C:\\Users\\Usuario\\Desktop\\Nueva carpeta\\Usuarios.txt"
-ObjetoBuscado= BuscarUsuario( user,root)
-print(ObjetoBuscado.contra)
-
-m = hashlib.sha256(b"hola")
-a=CompararHashes(HashearString("hola1"),m.digest())
-"""
-
-#print ("Location:/http://localhost:8080/formulario.html")
-#print ("")
 
 

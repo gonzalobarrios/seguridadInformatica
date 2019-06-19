@@ -33,7 +33,17 @@ def RegistrarUsuario(usuario,password,ruta):
     UsuarioRegistrado = BuscarUsuario(usuario, ruta)
 
     if UsuarioRegistrado is not None:
-        print("Error: Usuario ya registrado previamente!")
+         print(""""
+        <body>
+        <div align="left">
+     
+        <label>"""+"Usuario previamente registrado""""</label>
+
+        <div class="opciones">
+                                <button type="button" class="save" onclick="window.location.href='javascript:history.back()'">Volver</button>
+                        </div>
+        <form >
+        """)
     else:
 
         #print("vamos a registrar usuario nuevo")
@@ -45,20 +55,21 @@ def RegistrarUsuario(usuario,password,ruta):
         archivo.write(NewUser.strip())
         archivo.write("\n")
         archivo.close()
-        print("Usuario registrado exitosamente! ")
+        
+        print("""<html><head>
+    
+        </head>
+        <body>
+        <div align="left">
+        <form >
+        <label>"""+"Registro exitoso""""</label>
+
+        <div class="opciones">
+                                <button type="button" class="save" onclick="window.location.href='javascript:history.back()'">Volver</button>
+                         </div>
+         """)
+    
     return UserObject
-
-def logIn(usuario,contra):
-    #ValidarDatos(usuario,contra)"
-    return 0
-
-
-
-#tomar parametros y hashear
-#buscar en el archivo 
-#comparar hashes
-#mostrar mensaje
-#ver lo del salto, cambia comparacion
 
 # """""""'"  MAIN """"
 
@@ -82,23 +93,7 @@ try:
 except:
     print("no se pudo completar la tarea")
 
-#print(m.digest())
-
-
-
-"""--------------------"""
-"""PRUEBAS"""
-"""
-user="Manolito" 
-root="C:\\Users\\Usuario\\Desktop\\Nueva carpeta\\Usuarios.txt"
-ObjetoBuscado= BuscarUsuario( user,root)
-print(ObjetoBuscado.contra)
-
-m = hashlib.sha256(b"hola")
-a=CompararHashes(HashearString("hola1"),m.digest())
-"""
-
-#print ("Location:/http://localhost:8080/formulario.html")
-#print ("")
+        
+  
 
 
