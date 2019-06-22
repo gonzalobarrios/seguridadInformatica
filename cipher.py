@@ -20,25 +20,25 @@ class Encryptor:
         cipher = AES.new(key, AES.MODE_CBC, iv)
         return iv + cipher.encrypt(message)
 
-    def encrypt_File(self, file_name):
+    def encrypt_file(self, file_name):
         with open(file_name, 'rb') as fo:
             plaintext = fo.read()
         enc = self.encrypt(plaintext, self.key)
-        with open(file_name + ".enc", "wb") as fo:
+        with open(file_name + ".enc", 'wb') as fo:
             fo.write(enc)
         os.remove(file_name)
 
-    def decrypt(self, cipherText, key):
-        iv = cipherText[:AES.block_size]
+    def decrypt(self, ciphertext, key):
+        iv = ciphertext[:AES.block_size]
         cipher = AES.new(key, AES.MODE_CBC, iv)
-        plaintext = cipher.decrypt(cipherText[AES.block_size:])
+        plaintext = cipher.decrypt(ciphertext[AES.block_size:])
         return plaintext.rstrip(b"\0")
 
     def decrypt_file(self, file_name):
         with open(file_name, 'rb') as fo:
-            cipherText = fo.read()
-        dec = self.decrypt(cipherText, self.key)
-        with open(file_name[:-4],'wb') as fo:
+            ciphertext = fo.read()
+        dec = self.decrypt(ciphertext, self.key)
+        with open(file_name[:-4], 'wb') as fo:
             fo.write(dec)
         os.remove(file_name)
 
@@ -48,7 +48,6 @@ class Encryptor:
         with open(file_name + ".encf", "wb") as f:
             f.write(enc)
         os.remove(file_name)
-        
         
             
         
