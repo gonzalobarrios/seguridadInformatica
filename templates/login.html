@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Flask Intro - login page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link   rel="stylesheet"  href="{{ url_for('static', filename='main.css') }}"media="screen">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Login</h1>
+      <br>
+      <form action="/login" method="POST">
+        <input type="text" required placeholder="Username" name="username" value="{{
+          request.form.username }}">
+         <input type="password" required placeholder="Password" name="password" value="{{
+          request.form.password }}">
+        <input class="btn btn-default" required type="submit" value="Login">
+      </form>
+
+
+      <h1>Registrarse </h1>
+      <br>
+      <form action="/registro" method="POST">
+        <input type="text" required placeholder="Username" name="username" value="{{
+          request.form.username }}">
+         <input type="password" required placeholder="Password" name="password" value="{{
+          request.form.password }}">
+
+          <input type="Confirm password" required placeholder="Confirm password" name="Confirm password" value="{{
+            request.form.password }}">
+        <input class="btn btn-default" type="submit" value="Registrarse">
+      </form>
+      
+          {% if error %}
+          <span>{{ error }}</span>
+          {% endif %}
+
+   
+                    
+    </div>
+  </body>
+</html>

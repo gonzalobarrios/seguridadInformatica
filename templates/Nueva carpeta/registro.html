@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+    <head>
+      <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+	<form >
+		<h3 class="text-center py-3 border-bottom">Registro</h3>
+		<div>
+			<label>Usuario</label>
+			<input type="text" placeholder="Usuario" name="Usuario" />
+		</div>
+		<div>
+			<label>Contrase&ntildea</label>
+			<input type="password" placeholder="password" name="Contrasena1" />
+		</div>
+		<div>
+			<label>Confirmar Contrase&ntildea</label>
+			<input type="password" placeholder="password" name="Contrasena2" />
+		</div>
+
+		<div class="opciones">
+			<button type="button" name="boton1" class="save"  onclick="window.location.href='http://localhost:8080/cgi-bin/registro.py'" / >Registrarse</button>
+		</div>
+	  <div class="row align-items-center justify-content-center">
+                  <button type="button" class="reset" onclick="window.location.href='http://localhost:8080/formInicial.html'">Volver</button>
+          
+                </div>	
+	
+		<div class="alert alert-danger">
+		  <strong>Recuerde :</strong> La contrase&ntildea debe tener al menos cinco caracteres.
+
+
+	</form>
+
+
+</body>
+</html>

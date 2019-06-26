@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+    <head>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	  <link   rel="stylesheet"  href="{{ url_for('static', filename='main.css') }}"media="screen">
+</head>
+
+<body>
+
+		<div class="container">
+				<h1>Cifrar</h1>
+				<br>
+				<form action="/encriptar" method="POST">
+				 
+					<label>Ruta</label>
+					<input type="text" required placeholder="Ruta" name="Ruta" value="{{
+						request.form.Ruta }}"/>
+					<label>Passphrase</label>
+					<input type="password" required placeholder="Passphrase" name="Passphrase" value="{{
+						request.form.Password}}"/>
+					<label>Confirm Passphrase</label>
+					<input type="password" required placeholder="Confirm Passphrase" name="Confirm Passphrase" value="{{
+						request.form.ConfirmPassword}}"/>	
+				  <input class="btn btn-default" type="submit" value="Cifrar">
+				</form>
+		  
+		  
+				<h1>Descifrar </h1>
+				<br>
+				<form action="/descifrar" method="POST">
+					<label>Ruta</label>
+					<input type="text" required placeholder="Ruta" name="Ruta" />
+					<label>Passphrase</label>
+					<input type="password" required placeholder="Passphrase" name="Passphrase" />
+				
+				  <input class="btn btn-default" type="submit" value="Descifrar">
+				</form>
+				
+					{% if error %}
+					<span>{{ error }}</span>
+					{% endif %}
+		
+          
+</body>
+
+
+</html>
