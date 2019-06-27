@@ -11,9 +11,9 @@
       <br>
       <form action="/login" method="POST">
         <input type="text" required placeholder="Username" name="username" value="{{
-          request.form.username }}">
+          request.form.username }}" required>
          <input type="password" required placeholder="Password" name="password" value="{{
-          request.form.password }}">
+          request.form.password }}" required minlength=8>
         <input class="btn btn-default" required type="submit" value="Login">
       </form>
 
@@ -22,12 +22,12 @@
       <br>
       <form action="/registro" method="POST">
         <input type="text" required placeholder="Username" name="username" value="{{
-          request.form.username }}">
+          request.form.username }}" required>
          <input type="password" required placeholder="Password" name="password" value="{{
-          request.form.password }}">
+          request.form.password }}" required minlength=8>
 
           <input type="password" required placeholder="Confirm password" name="Confirm password" value="{{
-            request.form.password }}">
+            request.form.password }}" required minlength=8>
         <input class="btn btn-default" type="submit" value="Registrarse">
       </form>
 
