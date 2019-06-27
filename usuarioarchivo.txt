@@ -1,0 +1,1 @@
+usuario,b'\xbf\x12\xf7\xa9\xe3\xa3\xe1\x8cd\x9c\xa8\xf3D/\xbf\xbbk\x04\x03$\xa4\xd9\x82Cx&\x84h\xa3\x1e\x04^',/Users/Gonzalo/Desktop/FACULTAD/2019 s1/Seguridad/ProyectoSeguridad/Proyecto/Criptografia.pdf.enc

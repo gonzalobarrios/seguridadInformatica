@@ -4,6 +4,7 @@ from Crypto import Random
 from Crypto.Cipher import AES
 import os
 import os.path
+import hashlib
 from os import listdir
 from os.path import isfile, join
 
@@ -48,8 +49,43 @@ class Encryptor:
         with open(file_name + ".encf", "wb") as f:
             f.write(enc)
         os.remove(file_name)
+
+def encriptarArchivo(usuario,pathfrase,ruta):
+    #Guardar pathfrase en el hash
+    key = hashlib.sha256(pathfrase.encode('utf-8')).digest()
+    print(key)
+    #key = str(key).replace(',', '.')
+    #print(key)
+    encriptador = Encryptor(key)
+    encriptador.encrypt_file(ruta)
+    rutaUsuarios = "/Users/Gonzalo/Desktop/FACULTAD/2019 s1/Seguridad/ProyectoSeguridad/Proyecto/usuarioarchivo.txt"
+    with open(rutaUsuarios, 'a') as file:
+        linea = str(usuario) + "," + str(key) + "," + str(ruta + ".enc")
+        file.write(linea)
+
+def desencriptarArchivo(usuario, pathfrase, ruta):
+    #Checkear si la key es la que se encuentra hasheada
+    result = False
+    key = hashlib.sha256(pathfrase.encode('utf-8')).digest()
+    rutaUsuarios = "/Users/Gonzalo/Desktop/FACULTAD/2019 s1/Seguridad/ProyectoSeguridad/Proyecto/usuarioarchivo.txt"
+    with open(rutaUsuarios, 'r') as file:
+        lines = file.readlines()
+    with open(rutaUsuarios, 'r') as file:
+        for usuarioArchivo in lines:
+            usuarioArchivoArr = usuarioArchivo.split(",")
+            print(usuarioArchivoArr)
+            if usuarioArchivoArr[0] == usuario:
+                print("1")
+                if usuarioArchivoArr[1] == str(key):
+                    print("1")
+                    if usuarioArchivoArr[2] == ruta:
+                        print("1")
+                        encriptador = Encryptor(key)
+                        encriptador.decrypt_file(ruta)
+                        result = True
+    return result
+                
         
-            
         
                                 
 
