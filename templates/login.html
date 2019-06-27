@@ -26,17 +26,17 @@
          <input type="password" required placeholder="Password" name="password" value="{{
           request.form.password }}">
 
-          <input type="Confirm password" required placeholder="Confirm password" name="Confirm password" value="{{
+          <input type="password" required placeholder="Confirm password" name="Confirm password" value="{{
             request.form.password }}">
         <input class="btn btn-default" type="submit" value="Registrarse">
       </form>
-      
+
           {% if error %}
           <span>{{ error }}</span>
           {% endif %}
 
-   
-                    
+
+
     </div>
   </body>
 </html>
