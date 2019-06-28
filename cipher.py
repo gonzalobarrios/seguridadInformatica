@@ -51,23 +51,30 @@ class Encryptor:
         os.remove(file_name)
 
 def encriptarArchivo(usuario,pathfrase,ruta):
-    #Guardar pathfrase en el hash
-    key = hashlib.sha256(pathfrase.encode('utf-8')).digest()
-    print(key)
-    #key = str(key).replace(',', '.')
-    #print(key)
-    encriptador = Encryptor(key)
-    encriptador.encrypt_file(ruta)
-    rutaUsuarios = "/Users/Gonzalo/Desktop/FACULTAD/2019 s1/Seguridad/ProyectoSeguridad/Proyecto/usuarioarchivo.txt"
-    with open(rutaUsuarios, 'a') as file:
-        linea = str(usuario) + "," + str(key) + "," + str(ruta + ".enc")
-        file.write(linea)
+    try:
+        result=False
+        #Guardar pathfrase en el hash
+        key = hashlib.sha256(pathfrase.encode('utf-8')).digest()
+        print(key)
+        #key = str(key).replace(',', '.')
+        #print(key)
+        encriptador = Encryptor(key)
+        encriptador.encrypt_file(ruta)
+        rutaUsuarios = "/Users/Usuario/Documents/Flask/ArchivosParaEncriptar/usuarioarchivo.txt"
+        with open(rutaUsuarios, 'a') as file:
+            linea = str(usuario) + "," + str(key) + "," + str(ruta + ".enc")
+            file.write(linea)
+            result= True
+        return result
+  
+    except FileNotFoundError:
+        return False
 
 def desencriptarArchivo(usuario, pathfrase, ruta):
     #Checkear si la key es la que se encuentra hasheada
     result = False
     key = hashlib.sha256(pathfrase.encode('utf-8')).digest()
-    rutaUsuarios = "/Users/Gonzalo/Desktop/FACULTAD/2019 s1/Seguridad/ProyectoSeguridad/Proyecto/usuarioarchivo.txt"
+    rutaUsuarios = "/Users/Usuario/Documents/Flask/ArchivosParaEncriptar/usuarioarchivo.txt"
     with open(rutaUsuarios, 'r') as file:
         lines = file.readlines()
     with open(rutaUsuarios, 'r') as file:

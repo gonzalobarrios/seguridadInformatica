@@ -54,10 +54,13 @@ def encriptar():
     error = None
     if request.method == 'POST':
         ruta= request.form['Ruta']
+
         passprhase= request.form['Passphrase']
-        operacion=cipher.Encryptar(sesion, ruta, passprhase)
+       
+        #confirmacion= request.form['Passphrase']
+        operacion=cipher.encriptarArchivo(sesion, passprhase, ruta.strip())
         if operacion==False:
-                error = 'ruta no encontrado'
+                error = 'ruta no encontrada o datos incorrectos'
                
         else:
               error = 'archivo cifrado exitosamente'
@@ -72,9 +75,9 @@ def descifrar():
     if request.method == 'POST':
         ruta= request.form['Ruta']
         passprhase= request.form['Passphrase']
-        operacion=cipher.Encrypt_file(user,ruta, passprhase)
+        operacion=cipher.desencriptarArchivo(sesion, passprhase, ruta.strip())
         if operacion==False:
-                error = "clave incorrecta o ruta no encontrada"
+                error = "ruta no encontrada o datos incorrectos"
                
                
         else:
