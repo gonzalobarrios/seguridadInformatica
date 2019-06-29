@@ -3,6 +3,7 @@ import hashing
 import loguear
 import registros
 import cipher
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
@@ -10,13 +11,20 @@ app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 def home():
     return render_template('Layouaaaat.html')
 
+
 @app.route('/inicio')
 def inicio():
-  return render_template('login.html')  
+    return render_template('login.html')
+
 
 @app.route('/encriptacionArchivos')
 def encriptacionArchivos():
   return render_template('FormEncriptar.html')  
+
+@app.route('/formOpciones')
+def Opciones():
+  return render_template('formOpciones.html')  
+
 
 
 
@@ -33,18 +41,24 @@ def login():
               
                 flash(f'Logueo exitoso', 'success')
                 sesion=user
-                return  redirect(url_for('encriptacionArchivos'))
+                return  redirect(url_for('formOpciones'))
                 
         else:
               flash(f'Datos inválidos. Intente de nuevo', 'danger')
         return render_template('login.html')
 
 
-sesion=""
+sesion = ""
+
+@app.route('/cifrar')
+def cifrar():
+    return render_template('formEncriptar.html')
+
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
     error = None
     if request.method == 'POST':
+
         user=request.form['username']
         contra= request.form['password']
         confirm= request.form['Confirm password']
@@ -61,11 +75,12 @@ def registro():
                 flash(f'Las contraseñas no coinciden', 'danger')
                 
         return render_template('login.html', error=error)
-
+       
 @app.route('/encriptar', methods=['GET', 'POST'])
 def encriptar():
     error = None
     if request.method == 'POST':
+
         ruta= request.form['Ruta']
         passprhase= request.form['Passphrase']
         confirm= request.form['Confirm Passphrase']
@@ -81,10 +96,24 @@ def encriptar():
                  flash(f'Las passphrase no coinciden. Intente de nuevo', 'danger')
                 
              
+        ruta = request.form['Ruta']
+
+        passprhase = request.form['Passphrase']
+        confirmpassprhase = request.form['Confirm Passphrase']
+
+        if passprhase == confirmpassprhase:
+
+            operacion = cipher.encriptarArchivo(sesion, passprhase, ruta.strip())
+            if operacion == False:
+                error = 'ruta no encontrada o datos incorrectos'
+
+            else:
+                error = 'archivo cifrado exitosamente'
+        else:
+            error = 'La confirmación de passphrase es incorrecta'
     return render_template('formEncriptar.html', error=error)
 
 
-    
 @app.route('/descifrar', methods=['GET', 'POST'])
 def descifrar():
     error = None
@@ -94,13 +123,13 @@ def descifrar():
         operacion=cipher.desencriptarArchivo(sesion, passprhase, ruta.strip())
         if operacion==False:
                 flash(f'Ruta no encontrada o passphrase incorrecta', 'danger')
-              
-               
-               
+        
         else:
               flash(f'Archivo descrifrado exitosamente', 'success')
              
     return render_template('formEncriptar.html', error=error)
 
+        else:
+            error = 'usuario descrifrado exitosamente'
 
-    
+    return render_template('formEncriptar.html', error=error)

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <head>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	  <link   rel="stylesheet"  href="{{ url_for('static', filename='main.css') }}"media="screen">
+</head>
+
+<body>
+
+		<div class="container">
+				<h1>Firmar digital</h1>
+				<br>
+				<form action="/firmadigital" method="POST">
+
+					<label>Ruta</label>
+					<input type="text" required placeholder="Ruta" name="Ruta" value="{{
+						request.form.Ruta }}"/>
+				  <input class="btn btn-default" type="submit" value="Firmar">
+				</form>
+
+
+				<h1>Verificar firma </h1>
+				<br>
+				<form action="/verificarfirma" method="POST">
+					<label>Ruta</label>
+					<input type="text" required placeholder="Ruta" name="Ruta" />
+					<label>Passphrase</label>
+					<input type="password" required minlength=8 placeholder="Passphrase" name="Passphrase" />
+
+				  <input class="btn btn-default" type="submit" value="Descifrar">
+				</form>
+
+					{% if error %}
+					<span>{{ error }}</span>
+					{% endif %}
+
+
+</body>
+
+
+</html>
