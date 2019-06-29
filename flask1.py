@@ -66,14 +66,18 @@ def encriptar():
         ruta = request.form['Ruta']
 
         passprhase = request.form['Passphrase']
+        confirmpassprhase = request.form['Confirm Passphrase']
 
-        # confirmacion= request.form['Passphrase']
-        operacion = cipher.encriptarArchivo(sesion, passprhase, ruta.strip())
-        if operacion == False:
-            error = 'ruta no encontrada o datos incorrectos'
+        if passprhase == confirmpassprhase:
 
+            operacion = cipher.encriptarArchivo(sesion, passprhase, ruta.strip())
+            if operacion == False:
+                error = 'ruta no encontrada o datos incorrectos'
+
+            else:
+                error = 'archivo cifrado exitosamente'
         else:
-            error = 'archivo cifrado exitosamente'
+            error = 'La confirmación de passphrase es incorrecta'
 
     return render_template('formEncriptar.html', error=error)
 
