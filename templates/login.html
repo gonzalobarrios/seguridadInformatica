@@ -1,42 +1,78 @@
 <html>
   <head>
-    <title>Flask Intro - login page</title>
+    <title>Seguridad informática - login page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link   rel="stylesheet"  href="{{ url_for('static', filename='main.css') }}"media="screen">
   </head>
   <body>
-    <div class="container">
-      <h1>Login</h1>
-      <br>
+      <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+          </div>
+      </div>
+
+      <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Ingresar</legend>
+      
       <form action="/login" method="POST">
+        <div >
+        <label>Usuario</label>
         <input type="text" required placeholder="Username" name="username" value="{{
-          request.form.username }}" required>
+          request.form.username }}">
+        </div>
+        <div >
+          <label>Contraseña</label>
          <input type="password" required placeholder="Password" name="password" value="{{
-          request.form.password }}" required minlength=8>
+          request.form.password }}">
+        </div>
+        <div >
+
         <input class="btn btn-default" required type="submit" value="Login">
+      </div>
+    
       </form>
+    </fieldset>
 
-
-      <h1>Registrarse </h1>
-      <br>
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Registrar</legend>
+    
       <form action="/registro" method="POST">
-        <input type="text" required placeholder="Username" name="username" value="{{
-          request.form.username }}" required>
-         <input type="password" required placeholder="Password" name="password" value="{{
-          request.form.password }}" required minlength=8>
-
-          <input type="password" required placeholder="Confirm password" name="Confirm password" value="{{
-            request.form.password }}" required minlength=8>
-        <input class="btn btn-default" type="submit" value="Registrarse">
+        <div >
+        <label>Usuario     </label>
+        <input type="text" required minlength=5 placeholder="Username" name="username" value="{{
+          request.form.username }}">
+        </div>
+        <div >
+          <label>Contraseña</label>
+         <input type="password" required minlength=5 placeholder="Password" name="password" value="{{
+          request.form.password }}">
+        </div>
+        <div >
+          <label>Confirme Contraseña</label>
+          <input type="password" id="confirm_password" required placeholder="Confirm password" name="Confirm password" value="{{
+            request.form.password }}">
+          </div>
+        <input class="btn btn-default" type="submit" value="Registrar" onclick=error >
       </form>
-
+      
+    
           {% if error %}
           <span>{{ error }}</span>
           {% endif %}
 
-
-
+   
+                    
     </div>
   </body>
 </html>

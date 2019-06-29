@@ -67,7 +67,7 @@ def encriptarArchivo(usuario,pathfrase,ruta):
             result= True
         return result
   
-    except FileNotFoundError:
+    except :
         return False
 
 def desencriptarArchivo(usuario, pathfrase, ruta):
