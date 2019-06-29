@@ -27,7 +27,7 @@ def login():
         if Comparacion:
             error = 'logueo exitoso'
             sesion = user
-            return render_template('formEncriptar.html')
+            return render_template('formOpciones.html')
 
         else:
             error = 'Invalid Credentials. Please try again.'
@@ -37,6 +37,9 @@ def login():
 
 sesion = ""
 
+@app.route('/cifrar')
+def cifrar():
+    return render_template('formEncriptar.html')
 
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
