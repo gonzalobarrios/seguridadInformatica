@@ -1,4 +1,4 @@
-from flask import Flask
+
 import Crypto
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
@@ -60,9 +60,5 @@ def verify(message, signature, pub_key):
       digest = MD5.new()
    digest.update(message)
    return signer.verify(digest, signature)
-app = Flask(__name__)
 
-@app.route('/')
-def index():
 
-	return str(newkeys(2000))

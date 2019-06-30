@@ -4,7 +4,7 @@ import loguear
 import registros
 import cipher
 import rsa
-import firmar
+import firma
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
@@ -135,45 +135,6 @@ def descifrar():
 
     return render_template('formEncriptar.html', error=error)
 
-def firmararchivo(usuario,file_name):
-    keypublica,keyprivada = rsa.newkeys(2048)
-
-    #Obtiene el documento a firmar
-    with open(file_name, 'rb') as fo:
-        documento = fo.read()
-
-    #Obtiene la firma del documento
-    firma = rsa.sign(documento, keyprivada, hashAlg="SHA-256")
-
-    #Guarda la firma del documento
-    with open(file_name + ".firma", 'wb') as fo:
-        fo.write(firma)
-
-    keypublica.exportKey(format='PEM')
-    #Guarda la clave publica
-    with open("public.pem", "wb") as pub_file:
-        pub_file.write(keypublica.exportKey('PEM'))
-
-    return True
-
-def validararchivo(usuario,file_name):
-
-    #Obtiene el documento firmado
-    with open(file_name, 'rb') as fo:
-        documento = fo.read()
-
-    #Obtiene la firma del documento
-    with open(file_name + ".firma", 'rb') as fo:
-        firma = fo.read()
-
-    #Obtiene la clave publica
-    with open("public.pem", "rb") as pub_file:
-        keypublica = rsa.importKey(pub_file.read())
-
-    #Valida el documento y la firma con la clave publica
-    validacion = rsa.verify(documento, firma, keypublica)
-
-    return validacion
 
 @app.route('/firmadigital', methods=['GET', 'POST'])
 def firmadigital():
@@ -181,7 +142,7 @@ def firmadigital():
     if request.method == 'POST':
         ruta = request.form['Ruta']
 
-        validacion = firmararchivo(sesion,ruta.strip())
+        validacion = firma.firmararchivo(sesion,ruta.strip())
         if validacion:
             error = 'Archivo firmado exitosamente'
 
@@ -196,7 +157,7 @@ def verificarfirma():
     if request.method == 'POST':
         ruta = request.form['Ruta']
 
-        validacion = validararchivo(sesion, ruta.strip())
+        validacion = firma.validararchivo(sesion, ruta.strip())
         if validacion:
             error = 'Firma verificada exitosamente'
 
