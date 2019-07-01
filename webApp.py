@@ -155,7 +155,7 @@ def firmadigital():
             flash(f'Archivo firmado exitosamente por el usuario '+datosFirma, 'success')
         else:
             flash(f'No se pudo firmar el archivo. Revise los datos', 'danger')
-            print(sesion+"adsadasd")
+            
          
     return render_template('formFirmar.html')
 
