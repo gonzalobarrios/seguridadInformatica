@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, url_for, request
+from flask import Flask,session, render_template, flash, redirect, url_for, request
 import hashing
 import loguear
 import registrar
@@ -6,8 +6,12 @@ import cipher
 import rsa
 import firma
 
+import requests
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+global sesion
+sesion=""
 
 
 @app.route('/')
@@ -30,6 +34,7 @@ def formOpciones():
     return render_template('formOpciones.html')
 
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
   
@@ -41,7 +46,10 @@ def login():
         if Comparacion:
 
             flash(f'Logueo exitoso', 'success')
-            sesion = user
+            session['username'] = user
+            a= session['username'] 
+            print(  a)
+          
             return redirect(url_for('formOpciones'))
 
         else:
@@ -50,7 +58,6 @@ def login():
         return render_template('formLogin.html')
 
 
-sesion = ""
 
 
 @app.route('/cifrar')
@@ -87,7 +94,7 @@ def registro():
 
 @app.route('/encriptar', methods=['GET', 'POST'])
 def encriptar():
-   
+    sesion=session['username']
     if request.method == 'POST':
 
         ruta = request.form['Ruta']
@@ -124,6 +131,8 @@ def encriptar():
 
 @app.route('/descifrar', methods=['GET', 'POST'])
 def descifrar():
+    sesion=session['username']
+    #r = s.get("http://httpbin.org/cookies")
    
     if request.method == 'POST':
         ruta = request.form['Ruta']
@@ -134,12 +143,12 @@ def descifrar():
 
         else:
             flash(f'Archivo descrifrado exitosamente', 'success')
-
     return render_template('formEncriptar.html')
 
 
 @app.route('/firmadigital', methods=['GET', 'POST'])
 def firmadigital():
+    sesion=session['username']
     if request.method == 'POST':
         ruta = request.form['Ruta']
         validacion = firma.firmararchivo(sesion,ruta.strip())
@@ -154,16 +163,16 @@ def firmadigital():
 
 @app.route('/verificarfirma', methods=['GET', 'POST'])
 def verificarfirma():
-    error = None
+    sesion=session['username']
     if request.method == 'POST':
         ruta = request.form['Ruta']
 
         validacion = firma.validararchivo(sesion, ruta.strip())
         if validacion:
       
-              flash(f'Firma verificada exitosamente', 'success')
+            flash(f'Firma verificada exitosamente', 'success')
 
         else:
-                flash(f'No se pudo firmar el archivo. Revise los datos', 'danger')
+            flash(f'No se pudo firmar el archivo. Revise los datos', 'danger')
           
     return render_template('formFirmar.html')
