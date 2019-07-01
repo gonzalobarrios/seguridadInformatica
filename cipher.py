@@ -56,7 +56,7 @@ def encriptarArchivo(usuario,pathfrase,ruta):
         encriptador = Encryptor(key)
         encriptador.encrypt_file(ruta)
       
-        rutaUsuarios = "/Users/Usuario/Documents/Flask/ArchivosParaEncriptar/usuarioarchivo.txt"
+        rutaUsuarios = "usuarioarchivo.txt"
         with open(rutaUsuarios, 'a') as file:
             linea = str(usuario) + "," + str(key) + "," + str(ruta + ".enc")
             file.write(linea)
@@ -69,7 +69,7 @@ def encriptarArchivo(usuario,pathfrase,ruta):
 def desencriptarArchivo(usuario, pathfrase, ruta):
     res = False
     key = hashlib.sha256(pathfrase.encode('utf-8')).digest()
-    rutaUsuarios = "/Users/Usuario/Documents/Flask/ArchivosParaEncriptar/usuarioarchivo.txt"
+    rutaUsuarios = "usuarioarchivo.txt"
     try:
         with open(rutaUsuarios, 'r') as file:
             lines = file.readlines()

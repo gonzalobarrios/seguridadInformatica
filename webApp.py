@@ -47,8 +47,6 @@ def login():
 
             flash(f'Logueo exitoso', 'success')
             session['username'] = user
-            a= session['username'] 
-            print(  a)
           
             return redirect(url_for('formOpciones'))
 
@@ -153,8 +151,8 @@ def firmadigital():
         ruta = request.form['Ruta']
         validacion = firma.firmararchivo(sesion,ruta.strip())
         if validacion:
-             
-            flash(f'Archivo firmado exitosamente', 'success')
+            datosFirma=sesion+" en la ruta "+ruta
+            flash(f'Archivo firmado exitosamente por el usuario '+datosFirma, 'success')
         else:
             flash(f'No se pudo firmar el archivo. Revise los datos', 'danger')
             print(sesion+"adsadasd")
