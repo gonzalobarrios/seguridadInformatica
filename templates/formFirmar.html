@@ -1,39 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "diseño.html" %}
+{% block content %}
+ <body>
 
-    <head>
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	  <link   rel="stylesheet"  href="{{ url_for('static', filename='main.css') }}"media="screen">
-</head>
+    
+      <div class="content-section">
+      <form action="/firmadigital" method="POST">
+        <fieldset class="form-group">
+            
+            <legend class="border-bottom mb-4">Firma digital</legend>
+        <div class="form-group">
+       
+				<label>Ruta</label>
+				<input type="text" required placeholder="Ruta" name="Ruta" value="{{
+					request.form.Ruta }}"/>
+				</div>
+				<input class="btn btn-default" type="submit" value="Firmar">
+			</form>
+		</div>
 
-<body>
+		<div class="content-section">
+			<form action="/verificarfirma" method="POST">
+				<fieldset class="form-group">
+            
+					<legend class="border-bottom mb-4">Verificar firma</legend>
+				<div class="form-group">
 
-		<div class="container">
-				<h1>Firmar digital</h1>
-				<br>
-				<form action="/firmadigital" method="POST">
-
-					<label>Ruta</label>
-					<input type="text" required placeholder="Ruta" name="Ruta" value="{{
-						request.form.Ruta }}"/>
-				  <input class="btn btn-default" type="submit" value="Firmar">
-				</form>
-
-
-				<h1>Verificar firma </h1>
-				<br>
-				<form action="/verificarfirma" method="POST">
 					<label>Ruta</label>
 					<input type="text" required placeholder="Ruta" name="Ruta" />
+						</div>
+		
+						<input class="btn btn-default" type="submit" value="Descifrar">
+					</form>
+					</div>
+		
+			
 
-				  <input class="btn btn-default" type="submit" value="Descifrar">
-				</form>
+                    
+    </div>
+  </body>
 
-					{% if error %}
-					<span>{{ error }}</span>
-					{% endif %}
+{% endblock content %}
+
+	
+
 
 
 </body>

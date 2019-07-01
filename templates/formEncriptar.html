@@ -1,61 +1,64 @@
-<!DOCTYPE html>
-<html>
-<head>
-
-    <head>
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	  <link   rel="stylesheet"  href="{{ url_for('static', filename='main.css') }}"media="screen">
-</head>
-
+{% extends "diseño.html" %}
+{% block content %}
 <body>
-		<div class="container">
-		<div class="row">
-
-				<div class="col-md-10">
-						{% with messages = get_flashed_messages(with_categories=true) %}
-						  {% if messages %}
-							{% for category, message in messages %}
-							  <div class="alert alert-{{ category }}">
-								{{ message }}
-							  </div>
-							{% endfor %}
-						  {% endif %}
-						{% endwith %}
-						{% block content %}{% endblock %}
-					  </div>
-					</div>
-				<h1>Cifrar</h1>
-			
-				<form action="/encriptar" method="POST">
-
+	<div class="content-section">
+		
+			<form action="/encriptar" method="POST">
+				<legend class="border-bottom mb-4">Cifrar</legend>
+				<div class="form-group">
 					<label>Ruta</label>
-					<input type="text" required placeholder="Ruta" name="Ruta" value="{{
-						request.form.Ruta }}"/>
+				<input type="text" required placeholder="Ruta" name="Ruta" value="{{
+					request.form.Ruta }}"/>
+				</div> 
+
+				<div class="form-group">
 					<label>Passphrase</label>
 					<input type="password" required minlength=8 placeholder="Passphrase" name="Passphrase" value="{{
 						request.form.Password}}"/>
-					<label>Confirm Passphrase</label>
-					<input type="password" id="confirm_password" required minlength=8 placeholder="Confirm Passphrase" name="Confirm Passphrase" value="{{
-						request.form.ConfirmPassword}}"/>
-				  <input class="btn btn-default" type="submit" value="Cifrar">
-				</form>
-
-
-				<h1>Descifrar </h1>
-				<br>
-				<form action="/descifrar" method="POST">
+					</div> 
+						<div class="form-group">
+							<label>Confirm Passphrase</label>
+							<input type="password" id="confirm_password" required minlength=8 placeholder="Confirm Passphrase" name="Confirm Passphrase" value="{{
+								request.form.ConfirmPassword}}"/>
+							</div> 
+							
+						  <input class="btn btn-default" type="submit" value="Cifrar">
+			
+			
+			</form>
+		</div>
+			
+		<div class="content-section">
+		
+			<form action="/descifrar" method="POST">
+				<legend class="border-bottom mb-4">Descifrar</legend>
+				<div class="form-group">
 					<label>Ruta</label>
 					<input type="text" required placeholder="Ruta" name="Ruta" />
+				</div> 
+
+				<div class="form-group">
 					<label>Passphrase</label>
 					<input type="password" required minlength=8 placeholder="Passphrase" name="Passphrase" />
-
-				  <input class="btn btn-default" type="submit" value="Descifrar">
-				</form>
-
+					</div> 
+						
+							
+						  <input class="btn btn-default" type="submit" value="Descifrar">
 			
-
+			
+			</form>
+		
+		</div>
 </body>
+{% endblock content %}
+
+
+
+
+
+
+
+
 
 
 </html>

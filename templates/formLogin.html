@@ -1,0 +1,62 @@
+{% extends "diseño.html" %}
+{% block content %}
+ <body>
+
+    
+      <div class="content-section">
+      <form action="/login" method="POST">
+        <fieldset class="form-group">
+            
+            <legend class="border-bottom mb-4">Ingresar</legend>
+        <div class="form-group">
+        <label>Usuario</label>
+        
+        <input type="text" required placeholder="Username" name="username" value="{{
+          request.form.username }}">
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+         <input type="password" required placeholder="Password" name="password" value="{{
+          request.form.password }}">
+        </div>
+        <div >
+
+        <input class="btn btn-default" required type="submit" value="Login">
+      </div>
+    </fieldset>
+      </form>
+    </div>
+        <div class="content-section">
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Registrar</legend>
+    
+      <form action="/registro" method="POST">
+        <div >
+        <label>Usuario     </label>
+        <input type="text" required minlength=5 placeholder="Username" name="username" value="{{
+          request.form.username }}">
+        </div>
+        <div >
+          <label>Contraseña</label>
+         <input type="password" required minlength=5 placeholder="Password" name="password" value="{{
+          request.form.password }}">
+        </div>
+        <div >
+          <label>Confirme Contraseña</label>
+          <input type="password" id="confirm_password" required placeholder="Confirm password" name="Confirm password" value="{{
+            request.form.password }}">
+          </div>
+        <input class="btn btn-default" type="submit" value="Registrar" onclick=error >
+      </form>
+    </div>
+    
+          {% if error %}
+          <span>{{ error }}</span>
+          {% endif %}
+
+   
+                    
+    </div>
+  </body>
+
+{% endblock content %}
