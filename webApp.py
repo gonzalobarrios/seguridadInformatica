@@ -34,7 +34,7 @@ def formOpciones():
 def login():
   
     if request.method == 'POST':
-        user = request.form['username']
+        user= request.form['username']
         contra = request.form['password']
         Comparacion = loguear.Loguear(user, contra)
 
@@ -73,7 +73,8 @@ def registro():
             test = registrar.Registrar(user, contra)
             if test is None:
                 flash(f'Usuario en uso. El usuario debe ser único', 'danger')
-
+            if test is False:
+                flash(f'Ruta de base de datos no encontrada. Ubique el archivo "usuarios.txt en la carpeta de la aplicación"', 'danger')
             else:
                 flash(f'Usuario registrado exitosamente', 'success')
 
@@ -143,9 +144,11 @@ def firmadigital():
         ruta = request.form['Ruta']
         validacion = firma.firmararchivo(sesion,ruta.strip())
         if validacion:
-                flash(f'Archivo firmado exitosamente', 'success')
+             
+            flash(f'Archivo firmado exitosamente', 'success')
         else:
             flash(f'No se pudo firmar el archivo. Revise los datos', 'danger')
+            print(sesion+"adsadasd")
          
     return render_template('formFirmar.html')
 
@@ -163,4 +166,4 @@ def verificarfirma():
         else:
                 flash(f'No se pudo firmar el archivo. Revise los datos', 'danger')
           
-    return render_template('formFirmar.html', error=error)
+    return render_template('formFirmar.html')

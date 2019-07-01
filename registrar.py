@@ -52,10 +52,12 @@ def RegistrarUsuario(usuario,password,ruta):
 
 # """""""'"  MAIN """"
 
-
 def Registrar(user,contra):
-    return RegistrarUsuario(user, contra, "usuarios.txt")
-
+    
+    try:
+        return RegistrarUsuario(user, contra, "usuarios.txt")
+    except:
+        return False
         
       
 
